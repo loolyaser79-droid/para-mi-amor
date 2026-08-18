@@ -21,7 +21,7 @@
       position: relative;
     }
 
-    /* Fondo de globos animados flotando POR ENCIMA de todo */
+    /* Fondo de globos flotantes */
     .balloons-container {
       position: fixed;
       top: 0;
@@ -29,8 +29,8 @@
       width: 100vw;
       height: 100vh;
       overflow: hidden;
-      z-index: 9999; /* Por encima de todo */
-      pointer-events: none; /* Contenedor transparente a clics */
+      z-index: 9999;
+      pointer-events: none; /* Permite hacer scroll e interactuar con la carta */
     }
     .balloon {
       position: absolute;
@@ -39,11 +39,11 @@
       animation: floatUp 8s linear infinite;
       user-select: none;
       cursor: pointer;
-      pointer-events: auto; /* Permite tocarlos y hacerles clic */
-      transition: transform 0.1s ease-out;
+      pointer-events: auto; /* Permite tocar únicamente los globos */
+      touch-action: manipulation;
     }
     .balloon.pop {
-      animation: popEffect 0.2s forwards !important;
+      animation: popEffect 0.15s forwards !important;
     }
 
     @keyframes floatUp {
@@ -59,7 +59,7 @@
 
     @keyframes popEffect {
       0% {
-        transform: scale(1.2);
+        transform: scale(1.3);
         opacity: 0.8;
       }
       100% {
@@ -102,6 +102,8 @@
       cursor: pointer;
       transition: transform 0.2s, background-color 0.2s;
       box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+      position: relative;
+      z-index: 10000; /* Asegura clic prioritario al botón */
     }
     .btn:hover {
       background-color: #c9184a;
@@ -170,7 +172,7 @@
       border-radius: 50%;
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
       transition: background-color 0.2s;
-      z-index: 10;
+      z-index: 10000;
     }
     .carousel-btn:hover {
       background-color: white;
@@ -234,29 +236,28 @@
   </div>
 
   <script>
+    function id(str) { return document.getElementById(str); }
+
     const balloonContainer = id('balloons');
     const balloonEmojis = ['🎈', '🎈', '🎈', '🎈', '🎈', '🎉', '✨'];
 
-    // Función para crear globos que se revientan al tocarlos
     function createBalloon() {
       const balloon = document.createElement('div');
       balloon.className = 'balloon';
       balloon.innerText = balloonEmojis[Math.floor(Math.random() * balloonEmojis.length)];
       balloon.style.left = Math.random() * 85 + 5 + 'vw';
-      balloon.style.fontSize = (Math.random() * 20 + 30) + 'px';
+      balloon.style.fontSize = (Math.random() * 20 + 32) + 'px';
       balloon.style.animationDuration = (Math.random() * 4 + 6) + 's';
 
-      // Evento para reventar al tocar/hacer clic
       const popBalloon = (e) => {
-        e.stopPropagation();
         if (!balloon.classList.contains('pop')) {
           balloon.classList.add('pop');
-          setTimeout(() => balloon.remove(), 200);
+          setTimeout(() => balloon.remove(), 150);
         }
       };
 
       balloon.addEventListener('touchstart', popBalloon, { passive: true });
-      balloon.addEventListener('click', popBalloon);
+      balloon.addEventListener('mousedown', popBalloon);
 
       balloonContainer.appendChild(balloon);
 
@@ -265,9 +266,7 @@
       }, 10000);
     }
 
-    setInterval(createBalloon, 500);
-
-    function id(str) { return document.getElementById(str); }
+    setInterval(createBalloon, 600);
 
     let autoSlideInterval;
 
@@ -275,12 +274,10 @@
       id('carta').style.display = 'block';
       document.querySelector('.btn').style.display = 'none';
 
-      // Lluvia extra de globos reventables
-      for(let i = 0; i < 20; i++) {
-        setTimeout(createBalloon, i * 80);
+      for(let i = 0; i < 15; i++) {
+        setTimeout(createBalloon, i * 100);
       }
 
-      // Iniciar giro automático de fotos cada 3 segundos
       autoSlideInterval = setInterval(() => {
         moveSlide(1);
       }, 3000);
