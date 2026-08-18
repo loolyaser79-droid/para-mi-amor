@@ -874,10 +874,10 @@
 <body>
 
   <!-- =====================================================
-       MÚSICA
+       MÚSICA (preload="none" evita el bloqueo inicial)
   ===================================================== -->
 
-  <audio id="bgMusic" loop preload="auto">
+  <audio id="bgMusic" loop preload="none">
     <source
       src="https://files.catbox.moe/bxgy06.mp3"
       type="audio/mpeg"
@@ -960,6 +960,7 @@
           class="player-cover"
           src="https://files.catbox.moe/jdixgx.jpeg"
           alt="Nuestra canción"
+          loading="lazy"
         >
 
         <div class="player-controls">
@@ -1131,21 +1132,25 @@
             <img
               src="https://i.imgur.com/AxXQZYF.jpeg"
               alt="Foto de Karla"
+              loading="lazy"
             >
 
             <img
               src="https://i.imgur.com/moUwPoP.jpeg"
               alt="Foto de Karla"
+              loading="lazy"
             >
 
             <img
               src="https://i.imgur.com/1XDIU3C.jpeg"
               alt="Foto de Karla"
+              loading="lazy"
             >
 
             <img
               src="https://i.imgur.com/Lu9LOAi.jpeg"
               alt="Foto de Karla"
+              loading="lazy"
             >
 
           </div>
@@ -1421,12 +1426,8 @@
         true;
 
 
-      /*
-       * El usuario acaba de tocar el botón,
-       * por lo que Safari/iOS y Android
-       * permiten iniciar el audio.
-       */
-
+      /* Cargar y reproducir audio */
+      music.load();
       music.play()
         .then(() => {
           updateMusicButton();
@@ -1443,10 +1444,7 @@
         });
 
 
-      /*
-       * Pequeña explosión de globos.
-       */
-
+      /* Pequeña explosión de globos */
       for (
         let i = 0;
         i < 18;
@@ -1461,10 +1459,7 @@
       }
 
 
-      /*
-       * Revelar carta.
-       */
-
+      /* Revelar carta */
       setTimeout(() => {
 
         effect.style.display =
@@ -1477,10 +1472,7 @@
           'none';
 
 
-        /*
-         * Carrusel automático.
-         */
-
+        /* Carrusel automático */
         autoSlideInterval =
           setInterval(
             () => moveSlide(1),
@@ -1607,4 +1599,3 @@
 
 </body>
 </html>
-
