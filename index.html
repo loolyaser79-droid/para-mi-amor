@@ -8,6 +8,7 @@
     * {
       box-sizing: border-box;
     }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #ffe6e6 0%, #ffb3ba 100%);
@@ -32,6 +33,7 @@
       z-index: 9999;
       pointer-events: none;
     }
+
     .balloon {
       position: absolute;
       bottom: -100px;
@@ -42,6 +44,7 @@
       pointer-events: auto;
       touch-action: manipulation;
     }
+
     .balloon.pop {
       animation: popEffect 0.15s forwards !important;
     }
@@ -81,17 +84,20 @@
       position: relative;
       z-index: 2;
     }
+
     h1 {
       color: #d63384;
       font-size: 24px;
       margin-bottom: 5px;
     }
+
     .dedicatoria {
       color: #7209b7;
       font-size: 18px;
       font-weight: 600;
       margin-bottom: 20px;
     }
+
     .btn {
       background-color: #ff4d6d;
       color: white;
@@ -105,10 +111,55 @@
       position: relative;
       z-index: 10000;
     }
+
     .btn:hover {
       background-color: #c9184a;
       transform: scale(1.05);
     }
+
+    /* Animación especial al abrir */
+    .opening-effect {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 20000;
+      pointer-events: none;
+    }
+
+    .opening-emojis {
+      font-size: 42px;
+      animation: heartBurst 1.6s ease-in-out forwards;
+      letter-spacing: 8px;
+      text-align: center;
+    }
+
+    @keyframes heartBurst {
+      0% {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+
+      30% {
+        opacity: 1;
+        transform: scale(1.15);
+      }
+
+      60% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(1.35);
+      }
+    }
+
     .letter {
       display: none;
       margin-top: 25px;
@@ -120,9 +171,11 @@
       padding-top: 20px;
       animation: fadeIn 1s ease-in-out;
     }
+
     .letter p {
       margin-bottom: 15px;
     }
+
     .highlight {
       font-weight: bold;
       color: #d63384;
@@ -137,6 +190,7 @@
       text-align: center;
       box-shadow: 0 4px 12px rgba(214, 51, 132, 0.15);
     }
+
     .player-cover {
       width: 100%;
       max-height: 300px;
@@ -144,12 +198,14 @@
       border-radius: 10px;
       margin-bottom: 12px;
     }
+
     .player-controls {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 15px;
     }
+
     .mini-btn {
       background-color: #ff4d6d;
       color: white;
@@ -161,6 +217,7 @@
       cursor: pointer;
       transition: background-color 0.2s, transform 0.1s;
     }
+
     .mini-btn:hover {
       background-color: #c9184a;
       transform: scale(1.05);
@@ -175,6 +232,7 @@
       margin-top: 30px;
       margin-bottom: 15px;
     }
+
     .carousel-container {
       position: relative;
       width: 100%;
@@ -184,11 +242,13 @@
       box-shadow: 0 5px 15px rgba(0,0,0,0.15);
       background: #fff0f3;
     }
+
     .carousel-slide {
       display: flex;
       width: 100%;
       transition: transform 0.6s ease-in-out;
     }
+
     .carousel-slide img {
       width: 100%;
       height: 380px;
@@ -196,6 +256,7 @@
       flex-shrink: 0;
       border-radius: 15px;
     }
+
     .carousel-btn {
       position: absolute;
       top: 50%;
@@ -212,18 +273,33 @@
       transition: background-color 0.2s;
       z-index: 10000;
     }
+
     .carousel-btn:hover {
       background-color: white;
     }
-    .prev { left: 10px; }
-    .next { right: 10px; }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
+
 <body>
 
   <!-- Elemento de audio con tu MP3 de Catbox -->
@@ -234,137 +310,401 @@
   <!-- Contenedor de globos flotantes e interactivos -->
   <div class="balloons-container" id="balloons"></div>
 
+  <!-- Efecto especial de apertura -->
+  <div class="opening-effect" id="openingEffect">
+    <div class="opening-emojis">❤️ 🥘 ❤️</div>
+  </div>
+
   <div class="card">
     <h1>Para mi amor ❤️</h1>
-    <p class="dedicatoria">Para Karla de Yasser &lt;3</p>
-    
-    <button class="btn" onclick="openLetter()">Abrir mi carta 💌</button>
+
+    <p class="dedicatoria">
+      Para Karla de Yasser &lt;3
+    </p>
+
+    <button class="btn" onclick="openLetter()">
+      Abrir mi carta 💌
+    </button>
 
     <div class="letter" id="carta">
 
       <!-- Mini reproductor personalizado con la portada cargada desde Catbox -->
       <div class="player-container">
-        <img class="player-cover" src="https://files.catbox.moe/jdixgx.jpeg" alt="Portada de la canción">
+
+        <img
+          class="player-cover"
+          src="https://files.catbox.moe/jdixgx.jpeg"
+          alt="Portada de la canción"
+        >
+
         <div class="player-controls">
-          <button class="mini-btn" id="playPauseBtn" onclick="togglePlay()">⏸️ Pausa</button>
-          <button class="mini-btn" onclick="forwardFive()">⏩ +5s</button>
+
+          <button
+            class="mini-btn"
+            id="playPauseBtn"
+            onclick="togglePlay()"
+          >
+            ⏸️ Pausa
+          </button>
+
+          <button
+            class="mini-btn"
+            onclick="forwardFive()"
+          >
+            ⏩ +5s
+          </button>
+
         </div>
       </div>
 
-      <p>Hoy es tu día, y aunque me hubiera encantado poder estar contigo, abrazarte, besarte y celebrar a tu lado, quiero que al menos estas palabras te recuerden algo que para mí es muy importante:</p>
-      <p class="highlight">Te amo muchísimo.</p>
-      <p>Y no es solamente porque hoy sea tu cumpleaños. Te amo porque eres una de esas personas que están presentes en mi vida todos los días, incluso en los momentos en los que quizá no te das cuenta de cuánto significas para mí.</p>
-      <p class="highlight">Eres una de las personas más importantes de mi mundo.</p>
-      <p>Quiero que sepas que no importa cómo te sientas. Si algún día estás feliz, quiero estar contigo para compartir esa felicidad. Si estás triste, quiero estar ahí para abrazarte. Si te sientes muy mal, quiero que puedas contar conmigo. No quiero estar solamente en tus días bonitos; quiero acompañarte también en los días difíciles.</p>
-      <p class="highlight">Quiero estar contigo.</p>
-      <p>Quiero poder abrazarte, escucharte, hacerte reír, molestarte un poquito, cuidarte cuando lo necesites y, sobre todo, quiero poder darte muchos besos. ❤️</p>
-      <p>Ojalá hoy pudiera estar contigo y hacer todo eso en persona.</p>
-      <p>También quiero pedirte perdón por no poder regalarte flores hoy. Sé que quizá parece algo pequeño, pero créeme que me hubiera encantado poder llegar contigo con unas flores y verte sonreír.</p>
-      <p>Ahorita estoy recuperándome económicamente porque no he tenido trabajo, y por eso no pude hacerlo como me hubiera gustado. Pero quiero que sepas que no me olvidé de ti ni dejé de querer hacerlo. Espero poder hacerlo aunque no sea precisamente hoy, porque quiero tener ese detalle contigo y verte feliz.</p>
-      <p>Quizá no pueda darte todo lo que quisiera en este momento, pero sí puedo darte algo que para mí vale muchísimo:</p>
-      <p class="highlight">mi cariño, mi tiempo, mi compañía y todo mi amor.</p>
-      <p>Gracias por estar. Gracias por seguir estando. Gracias por formar parte de mi vida y por ser tú.</p>
-      <p>Espero que este nuevo año de tu vida esté lleno de momentos bonitos, de cosas que te hagan sonreír y de muchas razones para sentirte feliz.</p>
-      <p>Y cuando las cosas no estén tan bonitas, espero que recuerdes que tienes a alguien que quiere estar ahí contigo.</p>
-      <p class="highlight">Yo.</p>
-      <p>Feliz cumpleaños, mi amor. 🎂❤️</p>
-      <p>Te amo un montón.</p>
-      <p>Y ojalá hoy pudiera estar ahí para decirte todo esto mientras te abrazo y te doy un beso.</p>
-      <p class="highlight" style="font-size: 18px; text-align: center;">Feliz cumpleaños, mi niña.</p>
+      <p>
+        Hoy es tu día, y aunque me hubiera encantado poder estar contigo,
+        abrazarte, besarte y celebrar a tu lado, quiero que al menos estas
+        palabras te recuerden algo que para mí es muy importante:
+      </p>
+
+      <p class="highlight">
+        Te amo muchísimo.
+      </p>
+
+      <p>
+        Y no es solamente porque hoy sea tu cumpleaños. Te amo porque eres
+        una de esas personas que están presentes en mi vida todos los días,
+        incluso en los momentos en los que quizá no te das cuenta de cuánto
+        significas para mí.
+      </p>
+
+      <p class="highlight">
+        Eres una de las personas más importantes de mi mundo.
+      </p>
+
+      <p>
+        Quiero que sepas que no importa cómo te sientas. Si algún día estás
+        feliz, quiero estar contigo para compartir esa felicidad. Si estás
+        triste, quiero estar ahí para abrazarte. Si te sientes muy mal,
+        quiero que puedas contar conmigo. No quiero estar solamente en tus
+        días bonitos; quiero acompañarte también en los días difíciles.
+      </p>
+
+      <p class="highlight">
+        Quiero estar contigo.
+      </p>
+
+      <p>
+        Quiero poder abrazarte, escucharte, hacerte reír, molestarte un
+        poquito, cuidarte cuando lo necesites y, sobre todo, quiero poder
+        darte muchos besos. ❤️
+      </p>
+
+      <p>
+        Ojalá hoy pudiera estar contigo y hacer todo eso en persona.
+      </p>
+
+      <p>
+        También quiero pedirte perdón por no poder regalarte flores hoy.
+        Sé que quizá parece algo pequeño, pero créeme que me hubiera
+        encantado poder llegar contigo con unas flores y verte sonreír.
+      </p>
+
+      <p>
+        Ahorita estoy recuperándome económicamente porque no he tenido
+        trabajo, y por eso no pude hacerlo como me hubiera gustado. Pero
+        quiero que sepas que no me olvidé de ti ni dejé de querer hacerlo.
+        Espero poder hacerlo aunque no sea precisamente hoy, porque quiero
+        tener ese detalle contigo y verte feliz.
+      </p>
+
+      <p>
+        Quizá no pueda darte todo lo que quisiera en este momento, pero sí
+        puedo darte algo que para mí vale muchísimo:
+      </p>
+
+      <p class="highlight">
+        mi cariño, mi tiempo, mi compañía y todo mi amor.
+      </p>
+
+      <p>
+        Gracias por estar. Gracias por seguir estando. Gracias por formar
+        parte de mi vida y por ser tú.
+      </p>
+
+      <p>
+        Espero que este nuevo año de tu vida esté lleno de momentos bonitos,
+        de cosas que te hagan sonreír y de muchas razones para sentirte feliz.
+      </p>
+
+      <p>
+        Y cuando las cosas no estén tan bonitas, espero que recuerdes que
+        tienes a alguien que quiere estar ahí contigo.
+      </p>
+
+      <p class="highlight">
+        Yo.
+      </p>
+
+      <p>
+        Feliz cumpleaños, mi amor. 🎂❤️
+      </p>
+
+      <p>
+        Te amo un montón.
+      </p>
+
+      <p>
+        Y ojalá hoy pudiera estar ahí para decirte todo esto mientras te
+        abrazo y te doy un beso.
+      </p>
+
+      <p
+        class="highlight"
+        style="font-size: 18px; text-align: center;"
+      >
+        Feliz cumpleaños, mi niña.
+      </p>
 
       <!-- Galería Carrete -->
-      <div class="carousel-title">Para la niña más bonita 📸❤️</div>
+      <div class="carousel-title">
+        Para la niña más bonita 📸❤️
+      </div>
+
       <div class="carousel-container">
+
         <div class="carousel-slide" id="carouselSlide">
-          <img src="https://i.imgur.com/AxXQZYF.jpeg" alt="Foto 1">
-          <img src="https://i.imgur.com/moUwPoP.jpeg" alt="Foto 2">
-          <img src="https://i.imgur.com/1XDIU3C.jpeg" alt="Foto 3">
-          <img src="https://i.imgur.com/Lu9LOAi.jpeg" alt="Foto 4">
+
+          <img
+            src="https://i.imgur.com/AxXQZYF.jpeg"
+            alt="Foto 1"
+          >
+
+          <img
+            src="https://i.imgur.com/moUwPoP.jpeg"
+            alt="Foto 2"
+          >
+
+          <img
+            src="https://i.imgur.com/1XDIU3C.jpeg"
+            alt="Foto 3"
+          >
+
+          <img
+            src="https://i.imgur.com/Lu9LOAi.jpeg"
+            alt="Foto 4"
+          >
+
         </div>
-        <button class="carousel-btn prev" onclick="moveSlide(-1)">❮</button>
-        <button class="carousel-btn next" onclick="moveSlide(1)">❯</button>
+
+        <button
+          class="carousel-btn prev"
+          onclick="moveSlide(-1)"
+        >
+          ❮
+        </button>
+
+        <button
+          class="carousel-btn next"
+          onclick="moveSlide(1)"
+        >
+          ❯
+        </button>
+
       </div>
 
     </div>
   </div>
 
   <script>
-    function id(str) { return document.getElementById(str); }
 
+    function id(str) {
+      return document.getElementById(str);
+    }
+
+    /* Globos */
     const balloonContainer = id('balloons');
-    const balloonEmojis = ['🎈', '🎈', '🎈', '🎈', '🎈', '🎉', '✨'];
+
+    const balloonEmojis = [
+      '🎈',
+      '🎈',
+      '🎈',
+      '🎈',
+      '🎈',
+      '🎉',
+      '✨'
+    ];
 
     function createBalloon() {
+
       const balloon = document.createElement('div');
+
       balloon.className = 'balloon';
-      balloon.innerText = balloonEmojis[Math.floor(Math.random() * balloonEmojis.length)];
-      balloon.style.left = Math.random() * 85 + 5 + 'vw';
-      balloon.style.fontSize = (Math.random() * 20 + 32) + 'px';
-      balloon.style.animationDuration = (Math.random() * 4 + 6) + 's';
+
+      balloon.innerText =
+        balloonEmojis[
+          Math.floor(Math.random() * balloonEmojis.length)
+        ];
+
+      balloon.style.left =
+        Math.random() * 85 + 5 + 'vw';
+
+      balloon.style.fontSize =
+        (Math.random() * 20 + 32) + 'px';
+
+      balloon.style.animationDuration =
+        (Math.random() * 4 + 6) + 's';
 
       const popBalloon = (e) => {
+
         if (!balloon.classList.contains('pop')) {
+
           balloon.classList.add('pop');
-          setTimeout(() => balloon.remove(), 150);
+
+          setTimeout(() => {
+            balloon.remove();
+          }, 150);
+
         }
+
       };
 
-      balloon.addEventListener('touchstart', popBalloon, { passive: true });
-      balloon.addEventListener('mousedown', popBalloon);
+      balloon.addEventListener(
+        'touchstart',
+        popBalloon,
+        { passive: true }
+      );
+
+      balloon.addEventListener(
+        'mousedown',
+        popBalloon
+      );
 
       balloonContainer.appendChild(balloon);
 
       setTimeout(() => {
-        if (balloon.parentNode) balloon.remove();
+
+        if (balloon.parentNode) {
+          balloon.remove();
+        }
+
       }, 10000);
+
     }
 
     setInterval(createBalloon, 600);
 
+    /* Música */
     let autoSlideInterval;
+
     const music = id('bgMusic');
 
+    /* Abrir carta */
     function openLetter() {
-      id('carta').style.display = 'block';
-      document.querySelector('.btn').style.display = 'none';
 
-      // Reproducción automática de música
-      music.play().catch(e => console.log("Error al reproducir el audio: ", e));
+      const effect = id('openingEffect');
 
-      for(let i = 0; i < 15; i++) {
-        setTimeout(createBalloon, i * 100);
-      }
+      /*
+       * Primero mostramos únicamente:
+       * ❤️ 🥘 ❤️
+       */
+      effect.style.display = 'flex';
 
-      autoSlideInterval = setInterval(() => {
-        moveSlide(1);
-      }, 3000);
+      /*
+       * La música comienza con el toque del usuario.
+       * Esto ayuda especialmente en iPhone/Safari.
+       */
+      music.play().catch(e =>
+        console.log(
+          "Error al reproducir el audio:",
+          e
+        )
+      );
+
+      /*
+       * Después de la pequeña animación
+       * revelamos la carta.
+       */
+      setTimeout(() => {
+
+        effect.style.display = 'none';
+
+        id('carta').style.display = 'block';
+
+        document.querySelector('.btn').style.display = 'none';
+
+        /*
+         * Explosión inicial de globos.
+         */
+        for (let i = 0; i < 15; i++) {
+
+          setTimeout(
+            createBalloon,
+            i * 100
+          );
+
+        }
+
+        /*
+         * Carrusel automático.
+         */
+        autoSlideInterval = setInterval(() => {
+
+          moveSlide(1);
+
+        }, 3000);
+
+      }, 1600);
+
     }
 
-    // Funciones del mini reproductor
+    /* Reproductor */
+
     function togglePlay() {
+
       const btn = id('playPauseBtn');
+
       if (music.paused) {
+
         music.play();
+
         btn.innerText = '⏸️ Pausa';
+
       } else {
+
         music.pause();
+
         btn.innerText = '▶️ Play';
+
       }
+
     }
 
     function forwardFive() {
+
       music.currentTime += 5;
+
     }
+
+    /* Carrusel */
 
     let currentIndex = 0;
+
     function moveSlide(direction) {
+
       const slide = id('carouselSlide');
-      const totalImages = slide.children.length;
-      
-      currentIndex = (currentIndex + direction + totalImages) % totalImages;
-      slide.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+      const totalImages =
+        slide.children.length;
+
+      currentIndex =
+        (
+          currentIndex +
+          direction +
+          totalImages
+        ) % totalImages;
+
+      slide.style.transform =
+        `translateX(-${currentIndex * 100}%)`;
+
     }
+
   </script>
 
-</body>
-</html>
+</body
