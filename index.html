@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para mi amor ❤️</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ffe6e6 0%, #ffb3ba 100%);
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 500px;
+      width: 100%;
+    }
+    h1 {
+      color: #d63384;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .btn {
+      background-color: #ff4d6d;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.2s;
+      box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+    }
+    .btn:hover {
+      background-color: #c9184a;
+      transform: scale(1.05);
+    }
+    .letter {
+      display: none;
+      margin-top: 25px;
+      text-align: left;
+      line-height: 1.7;
+      color: #4a4a4a;
+      font-size: 15px;
+      border-top: 2px dashed #ffccd5;
+      padding-top: 20px;
+      animation: fadeIn 1s ease-in-out;
+    }
+    .letter p {
+      margin-bottom: 15px;
+    }
+    .highlight {
+      font-weight: bold;
+      color: #d63384;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Para mi amor ❤️</h1>
+    <button class="btn" onclick="openLetter()">Abrir mi carta 💌</button>
+
+    <div class="letter" id="carta">
+      <p>Hoy es tu día, y aunque me hubiera encantado poder estar contigo, abrazarte, besarte y celebrar a tu lado, quiero que al menos estas palabras te recuerden algo que para mí es muy importante:</p>
+      <p class="highlight">Te amo muchísimo.</p>
+      <p>Y no es solamente porque hoy sea tu cumpleaños. Te amo porque eres una de esas personas que están presentes en mi vida todos los días, incluso en los momentos en los que quizá no te das cuenta de cuánto significas para mí.</p>
+      <p class="highlight">Eres una de las personas más importantes de mi mundo.</p>
+      <p>Quiero que sepas que no importa cómo te sientas. Si algún día estás feliz, quiero estar contigo para compartir esa felicidad. Si estás triste, quiero estar ahí para abrazarte. Si te sientes muy mal, quiero que puedas contar conmigo. No quiero estar solamente en tus días bonitos; quiero acompañarte también en los días difíciles.</p>
+      <p class="highlight">Quiero estar contigo.</p>
+      <p>Quiero poder abrazarte, escucharte, hacerte reír, molestarte un poquito, cuidarte cuando lo necesites y, sobre todo, quiero poder darte muchos besos. ❤️</p>
+      <p>Ojalá hoy pudiera estar contigo y hacer todo eso en persona.</p>
+      <p>También quiero pedirte perdón por no poder regalarte flores hoy. Sé que quizá parece algo pequeño, pero créeme que me hubiera encantado poder llegar contigo con unas flores y verte sonreír.</p>
+      <p>Ahorita estoy recuperándome económicamente porque no he tenido trabajo, y por eso no pude hacerlo como me hubiera gustado. Pero quiero que sepas que no me olvidé de ti ni dejé de querer hacerlo. Espero poder hacerlo aunque no sea precisamente hoy, porque quiero tener ese detalle contigo y verte feliz.</p>
+      <p>Quizá no pueda darte todo lo que quisiera en este momento, pero sí puedo darte algo que para mí vale muchísimo:</p>
+      <p class="highlight">mi cariño, mi tiempo, mi compañía y todo mi amor.</p>
+      <p>Gracias por estar. Gracias por seguir estando. Gracias por formar parte de mi vida y por ser tú.</p>
+      <p>Espero que este nuevo año de tu vida esté lleno de momentos bonitos, de cosas que te hagan sonreír y de muchas razones para sentirte feliz.</p>
+      <p>Y cuando las cosas no estén tan bonitas, espero que recuerdes que tienes a alguien que quiere estar ahí contigo.</p>
+      <p class="highlight">Yo.</p>
+      <p>Feliz cumpleaños, mi amor. 🎂❤️</p>
+      <p>Te amo un montón.</p>
+      <p>Y ojalá hoy pudiera estar ahí para decirte todo esto mientras te abrazo y te doy un beso.</p>
+      <p class="highlight" style="font-size: 18px; text-align: center;">Feliz cumpleaños, mi niña.</p>
+    </div>
+  </div>
+
+  <script>
+    function openLetter() {
+      document.getElementById('carta').style.display = 'block';
+      document.querySelector('.btn').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
