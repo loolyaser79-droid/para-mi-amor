@@ -128,11 +128,42 @@
       color: #d63384;
     }
 
-    /* Control de audio discreto dentro de la carta */
-    .audio-control {
-      margin-top: 10px;
+    /* Estilos del reproductor personalizado */
+    .player-container {
+      background: #fff0f3;
+      border-radius: 15px;
+      padding: 15px;
       margin-bottom: 20px;
       text-align: center;
+      box-shadow: 0 4px 12px rgba(214, 51, 132, 0.15);
+    }
+    .player-cover {
+      width: 100%;
+      max-height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+    .player-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+    }
+    .mini-btn {
+      background-color: #ff4d6d;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+    .mini-btn:hover {
+      background-color: #c9184a;
+      transform: scale(1.05);
     }
 
     /* Estilos del Carrete Automático */
@@ -210,8 +241,14 @@
     <button class="btn" onclick="openLetter()">Abrir mi carta 💌</button>
 
     <div class="letter" id="carta">
-      <div class="audio-control">
-        <p style="font-size: 13px; color: #d63384; margin-bottom: 5px; font-weight: 600;">🎵 Sonando de fondo...</p>
+
+      <!-- Mini reproductor personalizado con portada -->
+      <div class="player-container">
+        <img class="player-cover" src="https://pin.it/2yrgp5hHd" alt="Portada">
+        <div class="player-controls">
+          <button class="mini-btn" id="playPauseBtn" onclick="togglePlay()">⏸️ Pausa</button>
+          <button class="mini-btn" onclick="forwardFive()">⏩ +5s</button>
+        </div>
       </div>
 
       <p>Hoy es tu día, y aunque me hubiera encantado poder estar contigo, abrazarte, besarte y celebrar a tu lado, quiero que al menos estas palabras te recuerden algo que para mí es muy importante:</p>
@@ -285,13 +322,13 @@
     setInterval(createBalloon, 600);
 
     let autoSlideInterval;
+    const music = id('bgMusic');
 
     function openLetter() {
       id('carta').style.display = 'block';
       document.querySelector('.btn').style.display = 'none';
 
-      // Inicia la música de Catbox inmediatamente tras la interacción
-      const music = id('bgMusic');
+      // Reproducción automática de música
       music.play().catch(e => console.log("Error al reproducir el audio: ", e));
 
       for(let i = 0; i < 15; i++) {
@@ -301,6 +338,22 @@
       autoSlideInterval = setInterval(() => {
         moveSlide(1);
       }, 3000);
+    }
+
+    // Funciones del mini reproductor
+    function togglePlay() {
+      const btn = id('playPauseBtn');
+      if (music.paused) {
+        music.play();
+        btn.innerText = '⏸️ Pausa';
+      } else {
+        music.pause();
+        btn.innerText = '▶️ Play';
+      }
+    }
+
+    function forwardFive() {
+      music.currentTime += 5;
     }
 
     let currentIndex = 0;
