@@ -30,7 +30,7 @@
       height: 100vh;
       overflow: hidden;
       z-index: 9999;
-      pointer-events: none; /* Permite hacer scroll e interactuar con la carta */
+      pointer-events: none;
     }
     .balloon {
       position: absolute;
@@ -39,7 +39,7 @@
       animation: floatUp 8s linear infinite;
       user-select: none;
       cursor: pointer;
-      pointer-events: auto; /* Permite tocar únicamente los globos */
+      pointer-events: auto;
       touch-action: manipulation;
     }
     .balloon.pop {
@@ -103,7 +103,7 @@
       transition: transform 0.2s, background-color 0.2s;
       box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
       position: relative;
-      z-index: 10000; /* Asegura clic prioritario al botón */
+      z-index: 10000;
     }
     .btn:hover {
       background-color: #c9184a;
@@ -126,6 +126,13 @@
     .highlight {
       font-weight: bold;
       color: #d63384;
+    }
+
+    /* Control de audio discreto dentro de la carta */
+    .audio-control {
+      margin-top: 10px;
+      margin-bottom: 20px;
+      text-align: center;
     }
 
     /* Estilos del Carrete Automático */
@@ -188,6 +195,11 @@
 </head>
 <body>
 
+  <!-- Elemento de audio con tu MP3 de Catbox -->
+  <audio id="bgMusic" loop>
+    <source src="https://files.catbox.moe/bxgy06.mp3" type="audio/mpeg">
+  </audio>
+
   <!-- Contenedor de globos flotantes e interactivos -->
   <div class="balloons-container" id="balloons"></div>
 
@@ -198,6 +210,10 @@
     <button class="btn" onclick="openLetter()">Abrir mi carta 💌</button>
 
     <div class="letter" id="carta">
+      <div class="audio-control">
+        <p style="font-size: 13px; color: #d63384; margin-bottom: 5px; font-weight: 600;">🎵 Sonando de fondo...</p>
+      </div>
+
       <p>Hoy es tu día, y aunque me hubiera encantado poder estar contigo, abrazarte, besarte y celebrar a tu lado, quiero que al menos estas palabras te recuerden algo que para mí es muy importante:</p>
       <p class="highlight">Te amo muchísimo.</p>
       <p>Y no es solamente porque hoy sea tu cumpleaños. Te amo porque eres una de esas personas que están presentes en mi vida todos los días, incluso en los momentos en los que quizá no te das cuenta de cuánto significas para mí.</p>
@@ -273,6 +289,10 @@
     function openLetter() {
       id('carta').style.display = 'block';
       document.querySelector('.btn').style.display = 'none';
+
+      // Inicia la música de Catbox inmediatamente tras la interacción
+      const music = id('bgMusic');
+      music.play().catch(e => console.log("Error al reproducir el audio: ", e));
 
       for(let i = 0; i < 15; i++) {
         setTimeout(createBalloon, i * 100);
